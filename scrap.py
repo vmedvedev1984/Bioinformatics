@@ -79,3 +79,38 @@ seq2 = str(all_species)
 alignments = pairwise2.align.globalms(seq1, seq2, 2, -1, -0.5, -0.1)
 for alignment in alignments:
     print(format_alignment(*alignment))
+
+###---MSA---###
+
+print("\nMultiple Sequence Alignment (MSA):\n")
+
+
+# Step 1: Create individual sequences
+sequence1 = Seq("AGTACACTG")
+sequence2 = Seq("CCTAGACTG")
+sequence3 = Seq("AGTACGCTG")
+sequence4 = Seq("TTTACACTA")
+
+# Step 2: Wrap sequences into SeqRecords
+align1 = SeqRecord(sequence1, id="seq1")
+align2 = SeqRecord(sequence2, id="seq2")
+align3 = SeqRecord(sequence3, id="seq3")
+align4 = SeqRecord(sequence4, id="seq4")
+
+# Create an MSA using Biopython's MultipleSeqAlignment class
+msa = MultipleSeqAlignment([align1, align2, align3, align4])
+print(msa)
+# Visualizing the MSA nucleotide counts
+alignment_length = msa.get_alignment_length()
+nucleotides = ["A", "T", "G", "C"]
+counts = {nuc: [str(msa[:, i]).count(nuc) for i in range(alignment_length)] for nuc in nucleotides}
+
+# Plotting nucleotide counts across alignment positions
+plt.figure(figsize=(10, 6))
+for nuc in nucleotides:
+    plt.plot(range(alignment_length), counts[nuc], label=f"{nuc} count")
+plt.xlabel("Alignment Position")
+plt.ylabel("Count")
+plt.title("Nucleotide Composition Across Alignment")
+plt.legend()
+plt.show()
