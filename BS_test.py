@@ -51,3 +51,17 @@ for link in soup.find_all('a'):
 # http://example.com/elsie
 # http://example.com/lacie
 # http://example.com/tillie
+tag['id'] = 'verybold'
+tag['another-attribute'] = 1
+tag
+# <b another-attribute="1" id="verybold"></b>
+
+del tag['id']
+del tag['another-attribute']
+tag
+# <b>bold</b>
+
+tag['id']
+# KeyError: 'id'
+tag.get('id')
+# None
