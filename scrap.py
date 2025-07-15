@@ -62,6 +62,29 @@ print(len(first_record))
 all_species = [seq_record.annotations["comment"] for seq_record in SeqIO.parse(Plasmid_file, "genbank")]
 print(all_species)
 
+from Bio.Align.Applications import ClustalOmegaCommandline
+
+# Define input and output files
+in_file = "D://align//unaligned.fasta"
+out_file = "D://align//aligned.fasta"
+
+# Create a ClustalOmegaCommandline object
+clustalomega_cline = ClustalOmegaCommandline(infile=in_file, outfile=out_file, outfmt="fasta")
+
+# Execute Clustal Omega
+stdout, stderr = clustalomega_cline()
+
+print(f"Clustal Omega output: {stdout}")
+print(f"Clustal Omega errors: {stderr}")
+
+"""
+
+from Bio.Align.Applications import MuscleCommandline
+muscle_exe = f"D:\\align\\muscle3.8.31_i86win32.exe"
+in_file = f"D:\\align\\unaligned.fasta"
+out_file = f"D:\\align\\aligned.fasta"
+muscle_cline = MuscleCommandline(muscle_exe, input=in_file, out=out_file)
+
 from Bio import pairwise2
 from Bio.pairwise2 import format_alignment
 from Bio.Seq import Seq
