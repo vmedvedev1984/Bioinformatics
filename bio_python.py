@@ -14,7 +14,16 @@ comlement_seq = my_seq[::-1] # sequence comlement
 comlement_seq = my_seq.complement()
 rev_comlement_seq = my_seq.reverse_complement()
 messenger_rna = my_seq.transcribe()
-protein = messenger_rna.translate(table="Vertebrate Mitochondrial")
+protein = messenger_rna.translate(table="Vertebrate Mitochondrial")  # table="Bacterial" cds=True
+translate _2  = coding_dna.translate(table=2, stop_symbol="@")
+
+standard_table = CodonTable.unambiguous_dna_by_name["Standard"]
+mito_table = CodonTable.unambiguous_dna_by_name["Vertebrate Mitochondrial"]
+
+#####____TABLE CODING_____######
+print(mito_table.stop_codons)
+print(mito_table.start_codons)
+print(mito_table.forward_table["ACG"])
 
 stringify_seq = str(my_seq)
 fasta_format_string = ">Name\n%s\n" % my_seq
