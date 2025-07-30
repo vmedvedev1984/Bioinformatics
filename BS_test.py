@@ -176,3 +176,31 @@ soup.find("head")
 soup.find("head")
 # <head><title>The Dormouse's story</title></head>
 
+soup.body.b
+# <b>The Dormouse's story</b>
+
+soup.a
+# <a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>
+
+soup.find_all('a')
+# [<a class="sister" href="http://example.com/elsie" id="link1">Elsie</a>,
+#  <a class="sister" href="http://example.com/lacie" id="link2">Lacie</a>,
+#  <a class="sister" href="http://example.com/tillie" id="link3">Tillie</a>]
+
+head_tag = soup.head
+head_tag
+# <head><title>The Dormouse's story</title></head>
+
+head_tag.contents
+# [<title>The Dormouse's story</title>]
+
+title_tag = head_tag.contents[0]
+title_tag
+# <title>The Dormouse's story</title>
+title_tag.contents
+# ['The Dormouse's story']
+
+text = title_tag.contents[0]
+text.contents
+# AttributeError: 'NavigableString' object has no attribute 'contents'
+
