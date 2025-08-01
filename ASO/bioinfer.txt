@@ -1,0 +1,7 @@
+https://www.biotite-python.org/latest/index.html
+https://scikit.bio/index.html#
+https://biopython.org/docs/latest/index.html
+
+BS
+
+https://www.crummy.com/software/BeautifulSoup/bs4/doc/#
