@@ -2,3 +2,5 @@ Fomivirsen
 5'-GCG TTT GCT CTT CTT CTT GCG-3'
 Eplontersen
 GGalNAc3-7a-[5'-m5U-m5C-m5U-m5U-G-G-T-T-A-5mC-A-T-G-A-A-A-5mU-5mC-5mC-5mC-3']
+Nusinersen
+
