@@ -1,0 +1,72 @@
+venv setup
+  
+
+pip install fastapi
+pip install "uvicorn[standard]"
+
+main.py
+
+from fastapi import FastAPI, Response
+from fastapi.responses import HTMLResponse, JSONResponse, PlainTextResponse, FileResponse
+from fastapi.encoders import jsonable_encoder
+
+app = FastAPI()
+@app.get("/")
+def read_root():
+    html_content = "<h2>Hello METANIT.COM!</h2>"
+    return HTMLResponse(content=html_content)
+
+@app.get("/about")
+def about():
+    return {"message": "О сайте"}
+
+@app.get("/jsonfy")
+def root():
+    data = {"message": "This message will be JSONed"}
+    json_data = jsonable_encoder(data)
+    return JSONResponse(content=json_data)
+
+@app.get("/resp")
+def root():
+    data = "Response page"
+    return Response(content=data, media_type="text/plain")
+
+@app.get("/")
+def root():
+    data = "PlainText response page"
+    return PlainTextResponse(content=data)
+
+/* Для отправки файлов из приложения FastAPI применяется класс FileResponse - наследник класса Response. */
+
+@app.get("/")
+def root():
+    return FileResponse("public/index.html")
+ 
+# альтернативный вариант
+@app.get("/file", response_class = FileResponse)
+def root_html():
+    return "public/index.html"
+
+
+
+"""
+@app.get("/text", response_class = PlainTextResponse)
+def root_text():
+    return "Hello METANIT.COM"
+ 
+@app.get("/html", response_class = HTMLResponse)
+def root_html():
+    return "<h2>Hello METANIT.COM</h2>"
+"""
+
+uvicorn main:app --reload
+
+get()
+post()
+put()
+delete()
+options()
+head()
+patch()
+trace()
+
