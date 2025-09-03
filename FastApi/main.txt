@@ -36,6 +36,15 @@ def root():
     data = "PlainText response page"
     return PlainTextResponse(content=data)
 
+@app.get("/users/{id}")
+def users(id: int):
+    return {"user_id": id}
+
+@app.get("/users/{name}/{age}")
+def users(name:str=Path(min_length=3, max_length=20), age:int=Path(ge=18, lt=111)):
+    return {"user_name": name, "user_age": age}
+
+
 /* Для отправки файлов из приложения FastAPI применяется класс FileResponse - наследник класса Response. */
 
 @app.get("/")
