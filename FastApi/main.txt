@@ -7,7 +7,7 @@ pip install "uvicorn[standard]"
 main.py
 
 from fastapi import FastAPI, Response
-from fastapi.responses import HTMLResponse, JSONResponse, PlainTextResponse, FileResponse
+from fastapi.responses import HTMLResponse, JSONResponse, PlainTextResponse, FileResponse, RedirectResponse
 from fastapi.encoders import jsonable_encoder
 
 app = FastAPI()
@@ -43,6 +43,18 @@ def users(id: int):
 @app.get("/users/{name}/{age}")
 def users(name:str=Path(min_length=3, max_length=20), age:int=Path(ge=18, lt=111)):
     return {"user_name": name, "user_age": age}
+
+@app.get("/notfound", status_code=404)
+def notfound():
+    return  {"message": "Resource Not Found"}
+
+@app.get("/old")
+def old():
+    return RedirectResponse("/new")
+ 
+@app.get("/new")
+def new():
+    return PlainTextResponse("Новая страница")
 
 
 /* Для отправки файлов из приложения FastAPI применяется класс FileResponse - наследник класса Response. */
