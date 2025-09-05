@@ -9,8 +9,29 @@ main.py
 from fastapi import FastAPI, Response
 from fastapi.responses import HTMLResponse, JSONResponse, PlainTextResponse, FileResponse, RedirectResponse
 from fastapi.encoders import jsonable_encoder
+from fastapi.staticfiles import StaticFiles
 
 app = FastAPI()
+
+app.mount("/static", StaticFiles(directory="public", html=True))
+
+@app.get("/")
+def root():
+    return FileResponse("public/index2.html")
+ 
+@app.post("/hello")
+def hello(data = Body()):
+    name = data["name"]
+    age = data["age"]
+    return {"message": f"{name}, ваш возраст - {age}"}
+
+'''
+@app.post("/hello")
+def hello(name:str  = Body(embed=True, min_length=3, max_length=20), 
+            age: int = Body(embed=True, ge=18, lt=111)):
+    return {"message": f"{name}, ваш возраст - {age}"}
+'''
+
 @app.get("/")
 def read_root():
     html_content = "<h2>Hello METANIT.COM!</h2>"
