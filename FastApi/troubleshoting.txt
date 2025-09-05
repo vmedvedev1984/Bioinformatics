@@ -1,0 +1,6 @@
+ERROR: [Errno 98] Address alredy in use
+  $ sudo lsof -i :8000 #ввести пароль
+  $ kill -9 <PID> #в <PID> ввести номер PID который соответствуе серверу uvicorn из предыдущей команды
+ERROR:
+
+ERROR:
