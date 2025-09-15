@@ -1,0 +1,11 @@
+нуклеотиды:
+Джукса-Кантора или обобщенную обратимую во времени (GTR)
+аминокислоты:
+JTT ( Jones-Taylor-Thornton, 1992 ), WAG ( Whelan & Goldman, 2001 ), LG ( Le and Gascuel, 2008 )
+
+Protein alignment with the JTT+CAT model:
+FastTree < alignment_file > tree_file or FastTree alignment.file > tree_file
+
+Nucleotide alignment with the GTR+CAT model:
+FastTree -gtr -nt < alignment.file > tree_file or FastTree -gtr -nt alignment_file > tree_file 
+
