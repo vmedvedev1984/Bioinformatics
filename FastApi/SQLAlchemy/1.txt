@@ -1,0 +1,31 @@
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import mapped_column
+from sqlalchemy import String
+
+from database import engine
+
+Session = sessionmaker(engine)
+
+# перенесём сюда модель для наглядности
+class UserBase(Base):
+	__tablename__ = "users"
+
+	id: Mapped[int] = mapped_column(primary_key=True)
+	name: Mapped[str] = mapped_column(String(30))
+	email: Mapped[str] = mapped_column(String(100))
+
+joe = UserBase(name="Joe", email="joe@example.com")
+
+def create_user(user: UserBase, session) -> None:
+	session.add(user)
+
+    
+with Session() as session:
+    try:
+        create_user(joe, session)
+    except:
+        session.rollback()
+        raise
+    else:
+        session.commit()
