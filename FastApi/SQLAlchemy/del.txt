@@ -1,0 +1,15 @@
+def delete(name: str, session) -> UserBase:
+	statement = select(UserBase).where(UserBase.name == name)
+	db_object = session.scalars(statement).one()
+
+	session.delete(db_object)
+	return db_object
+
+with Session() as session:
+    try:
+        delete("Joe", session)
+    except:
+        session.rollback()
+        raise
+    else:
+        session.commit()
