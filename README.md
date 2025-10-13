@@ -15,3 +15,5 @@ Pydna is a python package that provides a human-readable formal descriptions of 
 Pydna can be used as executable documentation for cloning.
 Designing genetic constructs with many components and steps, like recombinant metabolic pathways 🧫, often makes accurate documentation difficult, as seen in the poor state of scientific literature ☢️
 A cloning strategy expressed in pydna is complete, unambiguous and stable.
+
+https://swissmodel.expasy.org/repository/uniprot/P52434?template=6xre
