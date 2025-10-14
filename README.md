@@ -17,3 +17,5 @@ Designing genetic constructs with many components and steps, like recombinant me
 A cloning strategy expressed in pydna is complete, unambiguous and stable.
 
 https://swissmodel.expasy.org/repository/uniprot/P52434?template=6xre
+
+https://colab.research.google.com/github/hiyama341/teemi/blob/main/
