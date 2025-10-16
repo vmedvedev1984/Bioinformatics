@@ -1,41 +1,31 @@
-Pydna — это пакет Python, предоставляющий понятные человеку формальные описания стратегий клонирования и генетической сборки на Python для моделирования и верификации. Pydna можно использовать в качестве исполняемого файла документации для клонирования.
-
+Pydna — это пакет Python, предоставляющий понятные человеку формальные описания стратегий клонирования и генетической сборки на Python для моделирования и верификации. 
+Pydna можно использовать в качестве исполняемого файла документации для клонирования.
 Разработка генетических конструкций со множеством компонентов и этапов, таких как рекомбинантные метаболические пути 🧫, часто затрудняет точное документирование, о чем свидетельствует плохое состояние научной литературы ☢️
-
 Стратегия клонирования, выраженная в pydna, является полной , однозначной и стабильной .
-
 Pydna обеспечивает моделирование:
 
-Дизайн праймера
-ПЦР
-Рестрикционное пищеварение
-Лигирование
-Гель-электрофорез ДНК с получением изображений геля
-Гомологичная рекомбинация
-сборка Гибсона
-Сборка Golden Gate (в процессе)
+  Дизайн праймера
+  ПЦР
+  Рестрикционный анализ
+  Лигирование
+  Гель-электрофорез ДНК с получением изображений геля
+  Гомологичная рекомбинация
+  Сборка генетических конструкций по Гибссону
+  Сборка Golden Gate (в процессе)
+
 Практически любой эксперимент по субклонированию может быть описан в pydna, а его выполнение позволяет получить последовательности промежуточных и конечных молекул ДНК.
-
 Pydna была разработана с целью сделать ее понятной даже для биологов, имеющих хотя бы базовые знания Python.
-
 Pydna позволяет формализовать планирование и совместное использование стратегий клонирования и особенно полезна для сложных или комбинаторных конструкций молекул ДНК.
-
-Подтверждение 🤝
-Если вы используете pydna в своем исследовании, пожалуйста, укажите ссылку на статью:
-
-Перейра Ф., Азеведо Ф., Карвальо А., Рибейро Г.Ф., Бадде М.В. и Йоханссон Б. (2015). Pydna: инструмент моделирования и документации для стратегий сборки ДНК с использованием Python. БМЦ Биоинформатика, 16(142), 142. doi:10.1186/s12859-015-0544-x
 
 Документация и использование 📚
 Полную документацию всех модулей и классов можно найти по адресу https://pydna-group.github.io/pydna .
 
-Для начала рекомендуем ознакомиться с примерами блокнотов . Начните с Dseq , Dseq_Features и Importing_Seqs , которые охватывают основы работы с последовательностями. Остальные блокноты посвящены использованию pydna для различных стратегий клонирования, таких как сборка по Гибсону, рестрикционное лигирование и т. д.
-
+Для начала рекомендуем ознакомиться с примерами блокнотов. 
+Начните с Dseq , Dseq_Features и Importing_Seqs , которые охватывают основы работы с последовательностями. 
+Остальные блокноты посвящены использованию pydna для различных стратегий клонирования, таких как сборка по Гибсону, рестрикционное лигирование и т. д.
 Большая часть функциональности pydna реализована в виде методов для классов записей последовательностей двухцепочечной ДНК Dseq и Dseqrecord, которые являются подклассами классов Seq и SeqRecord Biopython .
 
 Эти классы значительно упрощают проектирование ПЦР-праймеров, моделирование ПЦР и клонирование методом копирования и вставки:
-
-ПРИМЕЧАНИЕ : Вы можете запустить этот пример в этом блокноте.
-
 из pydna.dseqrecord import Dseqrecord # Создадим запись последовательности ДНК и добавим к ней признак dsr = Dseqrecord ( "ATGCAAACAGTAATGATGGATGACATTCAAAGCACTGATTCTATTGCTGAAAAAGATAAT" ) dsr.add_feature ( x = 0 , y = 60 , type = "gene" , label = "my_gene" ) # Добавляем признак , чтобы выделить последовательность как ген dsr.figure ( )   
 
 Dseqrecord(-60)
@@ -64,12 +54,14 @@ ORIGIN
 forward primer: ATGCAAACAGTAATGATGGA
 reverse primer: ATTATCTTTTTCAGCAATAGAATCA
 
-5ATGCAAACAGTAATGATGGA...TGATTCTATTGCTGAAAAAGATAAT3
-                        |||||||||||||||||||||||||
-                        3ACTAAGATAACGACTTTTTCTATTA5
-5ATGCAAACAGTAATGATGGA3
-    ||||||||||||||||||||
-3TACGTTTGTCATTACTACCT...ACTAAGATAACGACTTTTTCTATTA5
+5 ATGCAAACAGTAATGATGGA...TGATTCTATTGCTGAAAAAGATAAT 3
+                         |||||||||||||||||||||||||
+                       3 ACTAAGATAACGACTTTTTCTATTA 5
+
+5 ATGCAAACAGTAATGATGGA 3
+  ||||||||||||||||||||
+3 TACGTTTGTCATTACTACCT...ACTAAGATAACGACTTTTTCTATTA 5
+
 # Допустим, мы не просто хотим его амплифицировать, а хотим добавить к нему сайты рестрикции! 
 from pydna.amplify import pcr # Добавляем сайты рестрикции к праймерам forward_primer = "ccccGGATCC" + amplicon . forward_primer reverse_primer = "ttttGGATCC" + amplicon . reverse_primer   
 
@@ -78,31 +70,34 @@ pcr_product  =  pcr ( forward_primer ,  reverse_primer ,  dsr )
 # Продукт ПЦР принадлежит классу `Amplicon`, подклассу `Dseqrecord`. 
 # При построении рисунка показано, где отжигаются праймеры. 
 pcr_product . figure ()
-            5ATGCAAACAGTAATGATGGA...TGATTCTATTGCTGAAAAAGATAAT3
-                                    |||||||||||||||||||||||||
-                                    3ACTAAGATAACGACTTTTTCTATTACCTAGGtttt5
-5ccccGGATCCATGCAAACAGTAATGATGGA3
+5 ATGCAAACAGTAATGATGGA...TGATTCTATTGCTGAAAAAGATAAT 3
+                         |||||||||||||||||||||||||
+                       3 ACTAAGATAACGACTTTTTCTATTACCTAGGtttt 5
+
+5 ccccGGATCCATGCAAACAGTAATGATGGA 3
             ||||||||||||||||||||
-            3TACGTTTGTCATTACTACCT...ACTAAGATAACGACTTTTTCTATTA5
+          3 TACGTTTGTCATTACTACCT...ACTAAGATAACGACTTTTTCTATTA 5
+
 # Если мы хотим увидеть последовательность более четко, мы можем превратить ее в `Dseqrecord` 
 pcr_product  =  Dseqrecord ( pcr_product ) 
 pcr_product . figure ()
 Dseqrecord(-80)
 ccccGGATCCATGCAAACAGTAATGATGGATGACATTCAAAGCACTGATTCTATTGCTGAAAAAGATAATGGATCCaaaa
 ggggCCTAGGTACGTTTGTCATTACTACCTACTGTAAGTTTCGTGACTAAGATAACGACTTTTTCTATTACCTAGGtttt
-из Bio.Restriction import BamHI # разрезы GGATCC # a, полезная нагрузка, c - вырезанные фрагменты a , полезная нагрузка , c = pcr_product.cut ( BamHI ) print ( a.figure () ) print ( ) print ( payload.figure ( ) ) print ( ) print ( c.figure ( ) )    
+
+from Bio.Restriction import BamHI 
+# разрезы GGATCC 
+# a, полезная нагрузка, c - вырезанные фрагменты a , полезная нагрузка , c = pcr_product.cut ( BamHI ) print ( a.figure () ) print ( ) print ( payload.figure ( ) ) print ( ) print ( c.figure ( ) )    
 
 Dseqrecord(-9)
 ccccG
 ggggCCTAG
-
 Dseqrecord(-70)
 GATCCATGCAAACAGTAATGATGGATGACATTCAAAGCACTGATTCTATTGCTGAAAAAAGATAATG
     GTACGTTGTCATTACTACCTACTGTAAGTTTCGTGACTAAGATAACGACTTTTTCTATTACCTAG
-
 Dseqrecord(-9)
 GATCCaaaa
-    Гтттт
+    Gtttt
 # Создаем круговой вектор для вставки ампликона в 
 vector  =  Dseqrecord ( "aatgtttttccctCCCGGGcaaaatAGATCTtgctatgcatcatcgatct" , circular  = True , name  = " vect" ) 
 vector.figure ( )
@@ -110,31 +105,33 @@ Dseqrecord(o50)
 aatgtttttccctCCCGGGcaaaatAGATCTtgctatgcatcatcgatct
 ttacaaaaagggaGGGCCCgttttaTCTAGAacgatacgtagtagctaga
   
-from Bio.Restriction import BglII # разрезает AGATCT linear_vector_bgl = vector . cut ( BglII )[ 0 ] # Линеаризует вектор в BglII (создает только один фрагмент)    
+from Bio.Restriction import BglII 
+# разрезает AGATCT linear_vector_bgl = vector . cut ( BglII )[ 0 ] # Линеаризует вектор в BglII (создает только один фрагмент)    
 # Лигируем нужный фрагмент с вектором и вызываем looped() для его зацикливания 
 # synced используется для размещения начальной координаты (0) в одном и том же месте для rec_vector и вектора 
-rec_vector =  ( linear_vector_bgl  +  payload ) . looped () . synced ( vector ) 
-rec_vector . figure ()
+rec_vector =  ( linear_vector_bgl  +  payload ).looped ().synced (vector) 
+rec_vector.figure()
 Dseqrecord(o116)
 aatgtttttccctCCCGGGcaaaatAGATCCATGCAAACAGTAATGATGGATGACATTCAAAGCACTGATTCTATTGCTGAAAAAGATAATGGATCTtgctatgcatcatcgatct
 ttacaaaaaagggaGGGCCCgttttaTCTAGGTACGTTTGTCATTACTACCTACTGTAAGTTTCGTGACTAAGATAACGACTTTTTCTATTACCTAGAacgatacgtagtagctaga
-# Давайте смоделируем сборку Gibson 
-из pydna.assembly import Assembly   
 
-фрагменты  =  [ 
-    Dseqrecord ( 'aatgtttttccctCACTACGtgctatgcatcat' ,  имя = "фрагмент_A" ), 
-    Dseqrecord ( 'tgctatgcatcatCTATGGAcactctaataatg ' ,  имя = "фрагмент_B" ), 
-    Dseqrecord ( 'cactctaataatgTTACATAaatgttttttccct' ,  имя = "фрагмент_C" ), 
+# Давайте смоделируем сборку Gibson 
+from pydna.assembly import Assembly   
+
+fragment  =  [ 
+    Dseqrecord ( 'aatgtttttccctCACTACGtgctatgcatcat' ,  name = "fragment_A" ), 
+    Dseqrecord ( 'tgctatgcatcatCTATGGAcactctaataatg ' ,  name = "fragment_B" ), 
+    Dseqrecord ( 'cactctaataatgTTACATAaatgttttttccct' ,  name = "fragment_C" ), 
 ]
 
 # предел — это мин. длина гомологии между фрагментами в сборке 
-asm  =  Assembly ( fragments ,  limit = 10 )
+asm  =  Assembly(fragments,  limit = 10)
 
 # Из объекта сборки, который может генерировать все возможные продукты, получаем круговой 
-продукт ,  * rest  =  asm . assemble_circular ()
+product, *rest  =  asm assemble_circular()
 
 # Мы можем распечатать рисунок, показывающий перекрытия между фрагментами 
-product . figure ()
+product.figure ()
  -|fragment_A|13
 |             \/
 |             /\
@@ -148,19 +145,30 @@ product . figure ()
 |                                            |
  --------------------------------------------
 # Или покажите окончательную последовательность: 
-Dseqrecord ( product ) . figure ()
+Dseqrecord(product).figure ()
 Dseqrecord(o60)
 aatgtttttccctCACTACGtgctatgcatcatCTATGGAcactctaataatgTTACATA
 ttacaaaaagggaGTGATGCacgatacgtagtaGATACCTgtgagattattacAATGTAT
+
 Как показывает пример выше, pydna отслеживает липкие концы и особенности.
+Pydna может быть очень компактной. Одиннадцать строк кода Python ниже имитируют создание рекомбинантной плазмиды. 
+Последовательности ДНК загружаются из Genbank по номерам доступа, которые гарантированно остаются стабильными с течением времени.
 
-Pydna может быть очень компактной. Одиннадцать строк кода Python ниже имитируют создание рекомбинантной плазмиды. Последовательности ДНК загружаются из Genbank по номерам доступа, которые гарантированно остаются стабильными с течением времени.
+from pydna.genbank import Genbank 
+gb = Genbank("myself@email.com") # Сообщите Genbank, кто вы! 
+gene = gb.nucleotide("X06997") # Ген пермеазы лактозы Kluyveromyces lactis LAC12. 
+from pydna.parsers import parse_primers 
+primer_f , primer_r = parse_primers(''' 
+>760_KlLAC12_rv (20-mer) ttaaacagattctgcctctg                              
+>759_KlLAC12_fw (19-mer) aaatggcagatcattcgag 
+''' )
 
-from pydna.genbank import Genbank gb = Genbank ( "myself@email.com" ) # Сообщите Genbank, кто вы! gene = gb . nucleotide ( "X06997" ) # Ген пермеазы лактозы Kluyveromyces lactis LAC12. from pydna.parsers import parse_primers primer_f , primer_r = parse_primers ( ''' >760_KlLAC12_rv (20-mer)                                         ttaaacagattctgcctctg   
-                                 
->759_KlLAC12_fw (19-mer) aaatggcagatcattcgag ''' )
-
-из pydna.amplify import pcr pcr_prod = pcr ( primer_f , primer_r , gene ) vector = gb .nucleotide ( "AJ001614" ) # pCAPs клонирующий вектор из Bio.Restriction import EcoRV lin_vector = vector .linearize ( EcoRV ) rec_vec = ( lin_vector + pcr_prod ) .looped ( )   
+from pydna.amplify import pcr 
+pcr_prod = pcr(primer_f, primer_r, gene) 
+vector = gb.nucleotide("AJ001614") # pCAPs клонирующий вектор 
+from Bio.Restriction import EcoRV 
+lin_vector = vector.linearize(EcoRV) 
+rec_vec = (lin_vector + pcr_prod).looped()   
       
 Установка 📦
 По умолчанию pydna устанавливается с минимальным набором зависимостей, но существуют необязательные зависимости для дополнительных функций.
