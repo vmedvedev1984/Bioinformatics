@@ -27,13 +27,16 @@ Pydna позволяет формализовать планирование и 
 Большая часть функциональности pydna реализована в виде методов для классов записей последовательностей двухцепочечной ДНК Dseq и Dseqrecord, которые являются подклассами классов Seq и SeqRecord Biopython .
 
 Эти классы значительно упрощают проектирование ПЦР-праймеров, моделирование ПЦР и клонирование методом копирования и вставки:
-из pydna.dseqrecord import Dseqrecord # Создадим запись последовательности ДНК и добавим к ней признак dsr = Dseqrecord ( "ATGCAAACAGTAATGATGGATGACATTCAAAGCACTGATTCTATTGCTGAAAAAGATAAT" ) dsr.add_feature ( x = 0 , y = 60 , type = "gene" , label = "my_gene" ) # Добавляем признак , чтобы выделить последовательность как ген dsr.figure ( )   
+
+from pydna.dseqrecord import Dseqrecord # Создадим запись последовательности ДНК и добавим к ней признак 
+dsr = Dseqrecord ( "ATGCAAACAGTAATGATGGATGACATTCAAAGCACTGATTCTATTGCTGAAAAAGATAAT" ) 
+dsr.add_feature ( x = 0 , y = 60 , type = "gene" , label = "my_gene" ) # Добавляем признак , чтобы выделить последовательность как ген 
+dsr.figure ( )   
 
 Dseqrecord(-60)
 ATGCAAACAGTAATGATGGATGACATTCAAAGCACTGATTCTATTGCTGAAAAAAGATAAT
 TACGTTTGTCATTACTACCTACTGTAAGTTTCGTGACTAAGATAACGACTTTTTCTATTA
-# Вот как это будет выглядеть в 
-формате файла genbank ( dsr . format ( "genbank" ))
+# Вот как это будет выглядеть в формате файла genbank ( dsr . format ( "genbank" ))
 LOCUS       name                      60 bp    DNA     linear   UNK 01-JAN-1980
 DEFINITION  description.
 ACCESSION   id
