@@ -1,21 +1,35 @@
 Установить WSL - в PowerShaell от одминистратора ("Run as Administrator")
+
   wsl --install
+
 Поумолчанию устанвится Ubuntu, при необходимости можно установить другой пакет дистрибутива
 После установки WSL нужно создать учетную запись пользователя и пароль для установленного дистрибутива Linux
 Проверить версию WSL можно командой
+
   wsl -l -v
+
 Установить Miniforge
+
   $ curl -L https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-x86_64.sh -o Miniforge3-Linux-x86_64.sh
   $ bash Miniforge3-Linux-x86_64.sh
+
 При появлении запроса "Do you wish the installer to prepend the install location to PATH ...? [yes|no]" нажать "Y"
 Создаем коталогидля Snakemake
+
   $ mkdir snakemake-tutorial
   $ cd snakemake-tutorial
+
 Загружаем некоторые примеры данных, на которых будет выполняться рабочий процесс:
+
   $ curl -L https://api.github.com/repos/snakemake/snakemake-tutorial-data/tarball -o snakemake-tutorial-data.tar.gz
+
 Далее извлекаем данные:
+
   $ tar --wildcards -xf snakemake-tutorial-data.tar.gz --strip 1 "*/data" "*/environment.yaml"
+
 Это создаст папку dataи файл environment.yamlв рабочем каталоге.
 Активируем базовую вертуальную среду:
+
   $ conda activate base
+
 файл environment.yaml
